@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liverpool FC - You'll Never Walk Alone</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f4f4f4;
+        color: #333;
+      }
+
+      .navbar {
+        background: #c8102e;
+        color: white;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .navbar .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .navbar .logo .bird {
+        font-size: 30px;
+      }
+
+      .navbar .logo h1 {
+        font-size: 22px;
+        letter-spacing: 1px;
+      }
+
+      .navbar .logo span {
+        font-size: 12px;
+        font-style: italic;
+        display: block;
+        color: #ffd700;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 25px;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        transition: 0.3s;
+        padding: 5px 0;
+        border-bottom: 2px solid transparent;
+      }
+
+      .nav-links a:hover {
+        border-bottom: 2px solid #ffd700;
+        color: #ffd700;
+      }
+
+      .menu-toggle {
+        display: none;
+        font-size: 28px;
+        cursor: pointer;
+      }
+
+      .hero {
+        background: linear-gradient(
+          135deg,
+          #c8102e 0%,
+          #8b0000 50%,
+          #2d0000 100%
+        );
+        color: white;
+        text-align: center;
+        padding: 100px 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "🔴";
+        font-size: 200px;
+        position: absolute;
+        left: -50px;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0.1;
+      }
+
+      .hero::after {
+        content: "⚪";
+        font-size: 200px;
+        position: absolute;
+        right: -50px;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0.1;
+      }
+
+      .hero .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero .bird-logo {
+        font-size: 80px;
+        margin-bottom: 20px;
+      }
+
+      .hero h2 {
+        font-size: 48px;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+      }
+
+      .hero .ynwa {
+        font-size: 24px;
+        font-style: italic;
+        color: #ffd700;
+        margin-bottom: 20px;
+      }
+
+      .hero p {
+        font-size: 18px;
+        max-width: 700px;
+        margin: 0 auto 30px;
+        line-height: 1.6;
+        opacity: 0.9;
+      }
+
+      .hero .btn {
+        background: #ffd700;
+        color: #c8102e;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .hero .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+      }
+
+      .stats {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        padding: 50px 20px;
+        background: white;
+        flex-wrap: wrap;
+      }
+
+      .stat-card {
+        text-align: center;
+        padding: 20px 40px;
+      }
+
+      .stat-card .number {
+        font-size: 40px;
+        font-weight: 800;
+        color: #c8102e;
+      }
+
+      .stat-card .label {
+        font-size: 14px;
+        color: #666;
+        margin-top: 5px;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 10px;
+        color: #c8102e;
+        position: relative;
+        padding-bottom: 15px;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: #ffd700;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 40px;
+        font-size: 16px;
+      }
+
+      .squad {
+        padding: 60px 20px;
+        background: #f4f4f4;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .squad-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .player-card {
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+        border-top: 4px solid #c8102e;
+      }
+
+      .player-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .player-card .player-icon {
+        font-size: 50px;
+        margin-bottom: 10px;
+      }
+
+      .player-card .jersey-number {
+        font-size: 14px;
+        color: #c8102e;
+        font-weight: 700;
+        background: #ffe0e0;
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 10px;
+        margin-bottom: 8px;
+      }
+
+      .player-card h3 {
+        font-size: 20px;
+        margin-bottom: 5px;
+      }
+
+      .player-card .position {
+        color: #666;
+        font-size: 14px;
+      }
+
+      .player-card .nationality {
+        font-size: 12px;
+        color: #999;
+        margin-top: 5px;
+      }
+
+      .news {
+        padding: 60px 20px;
+        background: white;
+      }
+
+      .news-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 25px;
+      }
+
+      .news-card {
+        background: #f9f9f9;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+      }
+
+      .news-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .news-card .news-icon {
+        background: #c8102e;
+        color: white;
+        font-size: 40px;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .news-card .news-body {
+        padding: 20px;
+      }
+
+      .news-card .news-date {
+        font-size: 12px;
+        color: #c8102e;
+        font-weight: 600;
+      }
+
+      .news-card h3 {
+        margin: 8px 0;
+        font-size: 18px;
+      }
+
+      .news-card p {
+        font-size: 14px;
+        color: #666;
+        line-height: 1.6;
+      }
+
+      .news-card .news-tag {
+        display: inline-block;
+        background: #ffd700;
+        color: #333;
+        padding: 2px 10px;
+        border-radius: 10px;
+        font-size: 11px;
+        font-weight: 700;
+        margin-top: 10px;
+      }
+
+      .history {
+        padding: 60px 20px;
+        background: #f4f4f4;
+      }
+
+      .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 100%;
+        background: #c8102e;
+      }
+
+      .timeline-item {
+        padding: 20px 40px;
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+      }
+
+      .timeline-item:nth-child(odd) {
+        left: 0;
+        text-align: right;
+      }
+
+      .timeline-item:nth-child(even) {
+        left: 50%;
+        text-align: left;
+      }
+
+      .timeline-item .dot {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: #ffd700;
+        border: 4px solid #c8102e;
+        border-radius: 50%;
+        top: 25px;
+      }
+
+      .timeline-item:nth-child(odd) .dot {
+        right: -12px;
+      }
+
+      .timeline-item:nth-child(even) .dot {
+        left: -12px;
+      }
+
+      .timeline-item .timeline-year {
+        font-size: 28px;
+        font-weight: 800;
+        color: #c8102e;
+      }
+
+      .timeline-item .timeline-content {
+        background: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .timeline-item .timeline-content h4 {
+        margin-bottom: 5px;
+        font-size: 16px;
+      }
+
+      .timeline-item .timeline-content p {
+        font-size: 13px;
+        color: #666;
+        line-height: 1.5;
+      }
+
+      .footer {
+        background: #1a1a2e;
+        color: white;
+        padding: 50px 20px 20px;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+      }
+
+      .footer h3 {
+        margin-bottom: 15px;
+        font-size: 18px;
+        color: #ffd700;
+      }
+
+      .footer p,
+      .footer li {
+        font-size: 14px;
+        opacity: 0.8;
+        line-height: 1.8;
+      }
+
+      .footer ul {
+        list-style: none;
+      }
+
+      .footer .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      .footer .social-links a {
+        color: white;
+        text-decoration: none;
+        background: #333;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: 0.3s;
+      }
+
+      .footer .social-links a:hover {
+        background: #c8102e;
+        transform: scale(1.1);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        margin-top: 30px;
+        border-top: 1px solid #333;
+        font-size: 13px;
+        opacity: 0.7;
+      }
+
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 15px 20px;
+        }
+
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 60px;
+          left: 0;
+          right: 0;
+          background: #c8102e;
+          padding: 20px;
+          gap: 15px;
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+
+        .hero h2 {
+          font-size: 32px;
+        }
+
+        .hero .bird-logo {
+          font-size: 50px;
+        }
+
+        .stats {
+          gap: 20px;
+          padding: 30px 20px;
+        }
+
+        .stat-card .number {
+          font-size: 30px;
+        }
+
+        .timeline::before {
+          left: 30px;
+        }
+
+        .timeline-item {
+          width: 100%;
+          padding-left: 70px;
+          padding-right: 20px;
+          text-align: left !important;
+        }
+
+        .timeline-item:nth-child(odd) {
+          left: 0;
+          text-align: left !important;
+        }
+
+        .timeline-item:nth-child(even) {
+          left: 0;
+        }
+
+        .timeline-item:nth-child(odd) .dot,
+        .timeline-item:nth-child(even) .dot {
+          left: 20px;
+          right: auto;
+        }
+
+        .news-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .squad-grid {
+          grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">
+        <span class="bird">🦅</span>
+        <div>
+          <h1>LIVERPOOL FC</h1>
+          <span>You'll Never Walk Alone</span>
+        </div>
+      </div>
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Beranda</a></li>
+        <li><a href="#squad">Squad</a></li>
+        <li><a href="#news">Berita</a></li>
+        <li><a href="#history">Sejarah</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <div class="bird-logo">🦅</div>
+        <h2>LIVERPOOL FOOTBALL CLUB</h2>
+        <div class="ynwa">"You'll Never Walk Alone"</div>
+        <p>
+          Didirikan pada tahun 1892, Liverpool FC adalah salah satu klub sepak
+          bola paling sukses dan bersejarah di Inggris dan dunia. Berbasis di
+          Anfield, Liverpool, Inggris.
+        </p>
+        <a href="#squad" class="btn">Lihat Squad Musim Ini</a>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-card">
+        <div class="number">19</div>
+        <div class="label">🏆 Liga Inggris</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">6</div>
+        <div class="label">🌟 Liga Champions</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">8</div>
+        <div class="label">🏅 Piala FA</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">9</div>
+        <div class="label">🥇 Piala Liga</div>
+      </div>
+    </div>
+
+    <!-- Squad -->
+    <section class="squad" id="squad">
+      <div class="container">
+        <h2 class="section-title">🔴 Squad Musim 2024/25</h2>
+        <p class="section-subtitle">
+          Para pemain terbaik Liverpool FC yang siap membawa kejayaan musim ini
+        </p>
+        <div class="squad-grid">
+          <div class="player-card">
+            <div class="player-icon">🧤</div>
+            <span class="jersey-number">#1</span>
+            <h3>Alisson Becker</h3>
+            <div class="position">Kiper</div>
+            <div class="nationality">🇧🇷 Brasil</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">🧤</div>
+            <span class="jersey-number">#62</span>
+            <h3>Caoimhin Kelleher</h3>
+            <div class="position">Kiper</div>
+            <div class="nationality">🇮🇪 Irlandia</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">🛡️</div>
+            <span class="jersey-number">#66</span>
+            <h3>Trent Alexander-Arnold</h3>
+            <div class="position">Bek Kanan</div>
+            <div class="nationality">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inggris</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">🛡️</div>
+            <span class="jersey-number">#4</span>
+            <h3>Virgil van Dijk</h3>
+            <div class="position">Bek Tengah</div>
+            <div class="nationality">🇳🇱 Belanda</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">🛡️</div>
+            <span class="jersey-number">#5</span>
+            <h3>Ibrahima Konaté</h3>
+            <div class="position">Bek Tengah</div>
+            <div class="nationality">🇫🇷 Prancis</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">🛡️</div>
+            <span class="jersey-number">#26</span>
+            <h3>Andrew Robertson</h3>
+            <div class="position">Bek Kiri</div>
+            <div class="nationality">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Skotlandia</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">🛡️</div>
+            <span class="jersey-number">#21</span>
+            <h3>Kostas Tsimikas</h3>
+            <div class="position">Bek Kiri</div>
+            <div class="nationality">🇬🇷 Yunani</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">🛡️</div>
+            <span class="jersey-number">#78</span>
+            <h3>Jarell Quansah</h3>
+            <div class="position">Bek Tengah</div>
+            <div class="nationality">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inggris</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">🛡️</div>
+            <span class="jersey-number">#2</span>
+            <h3>Joe Gomez</h3>
+            <div class="position">Bek</div>
+            <div class="nationality">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inggris</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">🧠</div>
+            <span class="jersey-number">#10</span>
+            <h3>Alexis Mac Allister</h3>
+            <div class="position">Gelandang</div>
+            <div class="nationality">🇦🇷 Argentina</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">🧠</div>
+            <span class="jersey-number">#8</span>
+            <h3>Dominik Szoboszlai</h3>
+            <div class="position">Gelandang</div>
+            <div class="nationality">🇭🇺 Hungaria</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">🧠</div>
+            <span class="jersey-number">#17</span>
+            <h3>Curtis Jones</h3>
+            <div class="position">Gelandang</div>
+            <div class="nationality">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inggris</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">🧠</div>
+            <span class="jersey-number">#3</span>
+            <h3>Wataru Endo</h3>
+            <div class="position">Gelandang Bertahan</div>
+            <div class="nationality">🇯🇵 Jepang</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">🧠</div>
+            <span class="jersey-number">#38</span>
+            <h3>Ryan Gravenberch</h3>
+            <div class="position">Gelandang</div>
+            <div class="nationality">🇳🇱 Belanda</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">🧠</div>
+            <span class="jersey-number">#19</span>
+            <h3>Harvey Elliott</h3>
+            <div class="position">Gelandang</div>
+            <div class="nationality">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inggris</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">⚡</div>
+            <span class="jersey-number">#11</span>
+            <h3>Mohamed Salah</h3>
+            <div class="position">Sayap Kanan</div>
+            <div class="nationality">🇪🇬 Mesir</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">⚡</div>
+            <span class="jersey-number">#7</span>
+            <h3>Luis Díaz</h3>
+            <div class="position">Sayap Kiri</div>
+            <div class="nationality">🇨🇴 Kolombia</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">⚡</div>
+            <span class="jersey-number">#20</span>
+            <h3>Diogo Jota</h3>
+            <div class="position">Penyerang</div>
+            <div class="nationality">🇵🇹 Portugal</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">⚡</div>
+            <span class="jersey-number">#9</span>
+            <h3>Darwin Núñez</h3>
+            <div class="position">Penyerang</div>
+            <div class="nationality">🇺🇾 Uruguay</div>
+          </div>
+          <div class="player-card">
+            <div class="player-icon">⚡</div>
+            <span class="jersey-number">#18</span>
+            <h3>Cody Gakpo</h3>
+            <div class="position">Penyerang</div>
+            <div class="nationality">🇳🇱 Belanda</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News -->
+    <section class="news" id="news">
+      <div class="container">
+        <h2 class="section-title">📰 Berita Transfer Terbaru</h2>
+        <p class="section-subtitle">Kabar terhangat seputar Liverpool FC</p>
+        <div class="news-grid">
+          <div class="news-card">
+            <div class="news-icon">✍️</div>
+            <div class="news-body">
+              <div class="news-date">15 Januari 2025</div>
+              <h3>Liverpool Resmi Perpanjang Kontrak Mohamed Salah</h3>
+              <p>
+                Mohamed Salah telah menandatangani perpanjangan kontrak baru
+                bersama Liverpool hingga tahun 2027. Kabar ini menjadi angin
+                segar bagi para penggemar The Reds.
+              </p>
+              <span class="news-tag">Kontrak Baru</span>
+            </div>
+          </div>
+          <div class="news-card">
+            <div class="news-icon">🔵</div>
+            <div class="news-body">
+              <div class="news-date">10 Januari 2025</div>
+              <h3>Chelsea Incar Caoimhin Kelleher di Bursa Januari</h3>
+              <p>
+                Chelsea disebut-sebut tertarik mendatangkan kiper cadangan
+                Liverpool, Caoimhin Kelleher, di bursa transfer musim dingin
+                Januari 2025 untuk memperkuat sektor penjaga gawang.
+              </p>
+              <span class="news-tag">Rumor Transfer</span>
+            </div>
+          </div>
+          <div class="news-card">
+            <div class="news-icon">⭐</div>
+            <div class="news-body">
+              <div class="news-date">5 Januari 2025</div>
+              <h3>Liverpool Pantau Bintang Muda Sporting Lisbon</h3>
+              <p>
+                Liverpool dikabarkan mengirimkan pemantau untuk menyaksikan
+                langsung performa gelandang muda Sporting Lisbon yang menjadi
+                incaran banyak klub Eropa.
+              </p>
+              <span class="news-tag">Pemantauan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- History -->
+    <section class="history" id="history">
+      <div class="container">
+        <h2 class="section-title">📜 Sejarah Liverpool FC</h2>
+        <p class="section-subtitle">
+          Perjalanan panjang klub legendaris Inggris ini
+        </p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">1892</div>
+              <h4>Berdirinya Liverpool FC</h4>
+              <p>
+                Liverpool Football Club didirikan oleh John Houlding setelah
+                terjadi perselisihan dengan Everton FC. Klub ini resmi bermain
+                di Anfield sejak awal.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">1901</div>
+              <h4>Gelar Liga Pertama</h4>
+              <p>
+                Liverpool memenangkan gelar Liga Inggris pertamanya di bawah
+                manajer Tom Watson.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">1959</div>
+              <h4>Era Bill Shankly Dimulai</h4>
+              <p>
+                Bill Shankly menjadi manajer Liverpool dan membawa era keemasan
+                pertama klub dengan transformasi total.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">1977</div>
+              <h4>Juara Piala Champions Pertama</h4>
+              <p>
+                Liverpool memenangkan Piala Champions Eropa untuk pertama
+                kalinya setelah mengalahkan Borussia Mönchengladbach di Roma.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">2005</div>
+              <h4>Keajaiban Istanbul</h4>
+              <p>
+                Liverpool melakukan comeback legendaris dari ketertinggalan 0-3
+                menjadi 3-3 dan menang adu penalti melawan AC Milan di Final
+                Liga Champions Istanbul.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">2019</div>
+              <h4>Juara Liga Champions Ke-6</h4>
+              <p>
+                Di bawah Jürgen Klopp, Liverpool memenangkan Liga Champions ke-6
+                dengan mengalahkan Tottenham Hotspur di Madrid.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">2020</div>
+              <h4>Juara Liga Premier Inggris</h4>
+              <p>
+                Liverpool memenangkan gelar Liga Premier Inggris setelah 30
+                tahun penantian panjang.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-year">Sekarang</div>
+              <h4>🔴 Masa Depan Cerah</h4>
+              <p>
+                Dengan skuad muda berbakat dan manajer baru, Liverpool terus
+                berjuang untuk kembali ke puncak sepak bola Inggris dan Eropa.
+                YNWA!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div>
+          <h3>🔴 Liverpool FC</h3>
+          <p>
+            Klub sepak bola legendaris dari Anfield, Liverpool, Inggris.
+            Didirikan tahun 1892.
+          </p>
+          <p><strong>Motto:</strong> You'll Never Walk Alone</p>
+        </div>
+        <div>
+          <h3>Navigasi</h3>
+          <ul>
+            <li>
+              <a href="#home" style="color: white; text-decoration: none"
+                >Beranda</a
+              >
+            </li>
+            <li>
+              <a href="#squad" style="color: white; text-decoration: none"
+                >Squad</a
+              >
+            </li>
+            <li>
+              <a href="#news" style="color: white; text-decoration: none"
+                >Berita</a
+              >
+            </li>
+            <li>
+              <a href="#history" style="color: white; text-decoration: none"
+                >Sejarah</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3>Ikuti Kami</h3>
+          <p>Dukung The Reds di media sosial!</p>
+          <div class="social-links">
+            <a href="#" title="Twitter">𝕏</a>
+            <a href="#" title="Instagram">📷</a>
+            <a href="#" title="YouTube">▶️</a>
+            <a href="#" title="Facebook">📘</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Liverpool FC Fan Page. You'll Never Walk Alone 🔴⚪</p>
+      </div>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        var nav = document.getElementById("navLinks");
+        nav.classList.toggle("active");
+      }
+
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          var target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+          // Close mobile menu
+          document.getElementById("navLinks").classList.remove("active");
+        });
+      });
+    </script>
+  </body>
+</html>
